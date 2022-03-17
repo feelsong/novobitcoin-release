@@ -1,4 +1,3 @@
-
 This is the binary release repository for Novo Bitcoin.
 
 ## Supported OS
@@ -10,16 +9,49 @@ This is the binary release repository for Novo Bitcoin.
 
 Including `novobitcoind` & `novobitcoin-cli`
 
+### Node configuration
+
+`~/.novo-bitcoin/novo.conf` example:
+
+```
+port=8666
+rpcport=8665
+rpcuser=USERNAME
+rpcpassword=PASSWORD
+```
+
+### Start node
+
+    novobitcoind -daemon
+
 ## Miner
 
 `novominer` is the mining program.
 
-Run script below first:
+### Miner dependencies
+
+    apt install libjansson4 libcurl4
+
+### Miner configuration
+
+`cfg.json` example:
 
 ```
-apt install libjansson4 libcurl4
+{
+    "url" : "http://127.0.0.1:8665",
+    "user" : "USERNAME",
+    "pass" : "PASSWORD",
+    "algo" : "sha256dt",
+    "threads" : "1",
+    "coinbase-addr": "1M9uLiL695r9pSxmxgmEUeZD8MXRtCEeJk",
+    "quiet" : true
+}
 ```
+
+### Start miner
+
+    novominer -c cfg.json
 
 ## Dockerfile
 
-Produce your own docker image with the dockerfile.
+Produce your own docker image with the `Dockerfile`.
