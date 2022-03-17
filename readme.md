@@ -1,13 +1,9 @@
-This is the binary release repository for Novo Bitcoin.
-
 ## Supported OS
 
 * debian (>= 10.11)
 * ubuntu (>= 20.04)
 
 ## Node
-
-Including `novobitcoind` & `novobitcoin-cli`
 
 ### Node configuration
 
@@ -22,15 +18,17 @@ rpcpassword=PASSWORD
 
 ### Start node
 
-    novobitcoind -daemon
+    $ novobitcoind -daemon
+
+### Stop node
+
+    $ novobitcoin-cli stop
 
 ## Miner
 
-`novominer` is the mining program.
-
 ### Miner dependencies
 
-    apt install libjansson4 libcurl4
+    $ apt install libjansson4 libcurl4
 
 ### Miner configuration
 
@@ -43,15 +41,26 @@ rpcpassword=PASSWORD
     "pass" : "PASSWORD",
     "algo" : "sha256dt",
     "threads" : "1",
-    "coinbase-addr": "1M9uLiL695r9pSxmxgmEUeZD8MXRtCEeJk",
-    "quiet" : true
+    "coinbase-addr": "BITCOIN_ADDRESS"
 }
 ```
 
+**BITCOIN_ADDRESS**:
+
+    $ novobitcoin-cli getnewaddress
+    1NBCnKZ93kSaXxiHzXQV4iqUSH4iRSDPmF
+
 ### Start miner
 
-    novominer -c cfg.json
+    $ novominer -c cfg.json
 
-## Dockerfile
+## Novo Bitcoin wallet
 
-Produce your own docker image with the `Dockerfile`.
+    $ novobitcoin-cli getbalance
+    100.0000
+
+    $ novobitcoin-cli sendtoaddress 1NBCnKZ93kSaXxiHzXQV4iqUSH4iRSDPmF 10.0000
+
+## Docker
+
+    $ docker build -t novo-bitcoin:0.1.0 .
